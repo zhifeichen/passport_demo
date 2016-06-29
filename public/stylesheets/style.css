@@ -1,6 +1,9 @@
+html {
+  font-family: 'Roboto', sans-serif, serif;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 20px;
 }
 
 a {
