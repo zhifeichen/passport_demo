@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    form(role="form", action="/login", method="post")
+        input(type="text", name="username", placeholder="Enter Username")
+        input(type="password", name="password", placeholder="Password")
+        button(type="submit") 登陆
+    a(href="/")
+        button(type="button") 取消
