@@ -11,7 +11,7 @@ injectTapEventPlugin();
 
 const App = () => (
     <MuiThemeProvider>
-        <AppBar title="Welcome Express!" iconElementRight={<IconButton><NavigationExpandMore /></IconButton> } />
+        <AppBar title="Welcome to Express!" iconElementRight={<IconButton><NavigationExpandMore /></IconButton> } />
     </MuiThemeProvider>
 );
 render(<App />, document.getElementById('app'));

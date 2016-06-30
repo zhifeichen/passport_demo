@@ -8,11 +8,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login', (req, res) => {
-  res.render('login', { user: req.user });
+  const username = req.query.username;
+  res.render('login', { message: { 
+                                    error: req.flash('error'),
+                                    usernameErr: req.flash('username'),
+                                    passwordErr: req.flash('password'),
+                                    username
+                                  }
+                      });
 });
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.redirect('/');
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: `/login?username=${req.body.username}`,
+                                   failureFlash: true
+  })(req, res, next);
 });
 
 router.get('/logout', (req, res) => {

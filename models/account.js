@@ -8,11 +8,11 @@ function authenticate(username, password, done) {
     if (!account) {
         return done(new Error('forget set account!'));
     }
-    if (!username) {
-        return done(null, false, { message: 'Incorrect username!'});
+    if (!username || username !== account.username) {
+        return done(null, false, { type: 'username', message: 'Incorrect username!'});
     }
     if (account.password !== password) {
-        return done(null, false, { message: 'Incorrect password!'});
+        return done(null, false, { type: 'password', message: 'Incorrect password!'});
     }
     return done(null, account);
 }

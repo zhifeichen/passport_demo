@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
+// flash message
+var flash = require('connect-flash');
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -29,7 +32,8 @@ app.use(session({
   secret: 'anything you can not guss',
   resave: false,
   saveUninitialized: false
-}))
+}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
