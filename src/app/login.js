@@ -19,6 +19,9 @@ class Login extends React.Component {
     }
 
     handleSubmit() {};
+    handleCancel() {
+        location.replace('/');
+    }
 
     render() {
         const ErrorText = this.errorText ? <p style={{color: red500}}>{this.errorText}</p> : null; 
@@ -41,7 +44,8 @@ class Login extends React.Component {
                     errorText={this.passwordErr}
                     type="password"
                 /><br />
-                <a href="/" style={style}><RaisedButton label="cancel"/></a><RaisedButton label="login" type="submit" primary={true} style={style}/>
+                {/* <a href="/" style={style}><RaisedButton label="cancel"/></a><RaisedButton label="login" type="submit" primary={true} style={style}/> */}
+                <RaisedButton label="cancel" style={style} onClick={this.handleCancel}/><RaisedButton label="login" type="submit" primary={true} style={style}/>
             </form>
             </div>
             </MuiThemeProvider>
