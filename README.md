@@ -8,4 +8,5 @@ a passport and express demo
 * [express](http://expressjs.com)
 * [babel](https://babeljs.io)
 * [browserify](http://browserify.org)
+* [gulp](http://gulpjs.com)
 * and more...
