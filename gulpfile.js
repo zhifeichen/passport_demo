@@ -3,6 +3,8 @@ const babel = require('gulp-babel');
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream')
+const streamify = require('gulp-streamify');
+const uglify = require('gulp-uglify');
 
 const src = './src/app';
 const dest = './public/javascripts';
@@ -32,6 +34,7 @@ gulp.task('browserify', (cb) => {
                 .bundle()
                 .on('error', (err) => console.log(err))
                 .pipe(source(bundleConfig.outputName))
+                .pipe(streamify(uglify()))
                 .pipe(gulp.dest(bundleConfig.dest))
                 .on('end', reportFinished);
         };
