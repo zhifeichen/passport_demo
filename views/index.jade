@@ -10,5 +10,6 @@ block content
     p You are currently logged in as #{user.username}
     a(href="/logout") Logout
 block scriptContent
+  script(type="text/javascript", src="/javascripts/app.js")
   script(type="text/javascript").
     var user = !{JSON.stringify(user)};

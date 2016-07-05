@@ -5,9 +5,10 @@ const babelify = require('babelify');
 const source = require('vinyl-source-stream')
 const streamify = require('gulp-streamify');
 const uglify = require('gulp-uglify');
+const path = require('path');
 
 const src = './src/app';
-const dest = './public/javascripts';
+const dest = './public/javascripts/';
 const config = [
         {
             entries: src + '/app.js',
@@ -52,6 +53,29 @@ gulp.task('browserify', (cb) => {
     };
 
     config.forEach(browserifyThis);
+})
+
+gulp.task('factor', (cb) => {
+    entries = [config[0].entries, config[1].entries];
+    outputs = [
+            (config[0].dest + config[0].outputName),
+            (config[1].dest + config[1].outputName)
+        ];
+    
+    const bundler = browserify(entries);
+
+    bundler.transform(babelify.configure());
+
+    bundler.on('factor.pipeline', (file, pipeline) =>{
+        pipeline.get('wrap')
+            .push(source(path.basename(file)), streamify(uglify()), gulp.dest(dest));
+    });
+    bundler.plugin('factor-bundle', {outputs: outputs});
+
+    bundler.bundle()
+            .pipe(source('common.js'))
+            .pipe(streamify(uglify()))
+            .pipe(gulp.dest(dest));
 })
 
 gulp.task('default', ["browserify"]);
